@@ -7,7 +7,7 @@
 #include "box.hpp"
 #include "wall.hpp"
 
-void addSuperballMovement(
+void addSuperballInteraction(
     std::vector<action>& actions,
     ball& superball,
     float const& speed
@@ -15,13 +15,12 @@ void addSuperballMovement(
     actions.push_back({[&]{superball.update({speed, 0});}});
     actions.push_back({superball, [&]{
         superball.bounce({-1, 1});
-        superball.update({speed, 0});
-    }});
+        superball.update({speed, 0});}}
+    );
     actions.push_back({[&]{superball.update({0, speed});}});
     actions.push_back({superball, [&]{
         superball.bounce({1, -1});
-        superball.update({0, speed});
-    }});
+        superball.update({0, speed});}});
 }
 
 int main(int argc, char *argv[]) {
@@ -62,7 +61,7 @@ int main(int argc, char *argv[]) {
     // ball superball2{{width / 3, height / 3}, 30, sf::Color::Yellow};
     // ball superball3{{width / 2, height / 4}, 30, sf::Color::Cyan};
     // ball superball4{{width / 7, height / 5}, 30, sf::Color::Magenta};
-    addSuperballMovement(actions, superball1, speed);
+    addSuperballInteraction(actions, superball1, speed);
     // addSuperballMovement(actions, superball2, speed);
     // addSuperballMovement(actions, superball3, speed);
     // addSuperballMovement(actions, superball4, speed);

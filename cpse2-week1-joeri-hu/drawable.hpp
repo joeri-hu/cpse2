@@ -13,9 +13,9 @@ public:
     static void drawAll(sf::RenderWindow& window);
     static bool anyObjectOverlaps(drawable const& target);
     virtual bool anyPointOverlaps(drawable const& other) const;
-    virtual void draw(sf::RenderWindow& window) const = 0;
     virtual sf::Vector2f getNearestPoint(sf::Vector2f const& reference) const;
     virtual float getNearestPointOffset() const;
+    virtual void draw(sf::RenderWindow& window) const;
 };
 
 sf::Vector2f operator+(

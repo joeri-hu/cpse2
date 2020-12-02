@@ -13,7 +13,6 @@ public:
         sf::Vector2f const& size,
         sf::Color const& color = sf::Color::White
     );
-    virtual void draw(sf::RenderWindow& window) const override;
 };
 
 #endif

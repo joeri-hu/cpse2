@@ -48,6 +48,10 @@ float drawable::getNearestPointOffset() const {
     return 0;
 }
 
+void drawable::draw(sf::RenderWindow& window) const {
+    window.draw(shape);
+}
+
 sf::Vector2f operator+(
     sf::Vector2f const& left,
     float const right

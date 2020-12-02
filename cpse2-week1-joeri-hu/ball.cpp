@@ -18,7 +18,7 @@ ball::ball(
 bool ball::anyPointOverlaps(drawable const& other) const {
     auto radius = circle.getRadius();
     sf::Vector2f const& center{circle.getPosition() + radius};
-    auto&& distance{center - other.getNearestPoint(center)};
+    auto distance = center - other.getNearestPoint(center);
     radius += other.getNearestPointOffset();
     distance *= distance;
     return (distance.x + distance.y) < (radius * radius);
@@ -32,10 +32,6 @@ sf::Vector2f ball::getNearestPoint(
 
 float ball::getNearestPointOffset() const {
     return circle.getRadius();
-}
-
-void ball::draw(sf::RenderWindow& window) const {
-    window.draw(circle);
 }
 
 void ball::update(sf::Vector2f const& delta) {

@@ -19,7 +19,6 @@ public:
         sf::Vector2f const& reference
     ) const override;
     virtual float getNearestPointOffset() const override;
-    virtual void draw(sf::RenderWindow& window) const override;
     void update(sf::Vector2f const& delta);
     void bounce(sf::Vector2f const& delta);
 };

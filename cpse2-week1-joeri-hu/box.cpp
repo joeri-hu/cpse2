@@ -15,10 +15,6 @@ box::box(
     rectangle.setFillColor(color);
 }
 
-void box::draw(sf::RenderWindow& window) const {
-    window.draw(rectangle);
-}
-
 void box::move(sf::Vector2f const& delta) {
     rectangle.move(delta);
     speed = delta;

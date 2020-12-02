@@ -13,7 +13,3 @@ wall::wall(
     rectangle.setSize(size);
     rectangle.setFillColor(color);
 }
-
-void wall::draw(sf::RenderWindow& window) const {
-    window.draw(rectangle);
-}

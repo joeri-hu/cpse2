@@ -15,12 +15,13 @@ void addSuperballInteraction(
     actions.push_back({[&]{superball.update({speed, 0});}});
     actions.push_back({superball, [&]{
         superball.bounce({-1, 1});
-        superball.update({speed, 0});}}
-    );
+        superball.update({speed, 0});
+    }});
     actions.push_back({[&]{superball.update({0, speed});}});
     actions.push_back({superball, [&]{
         superball.bounce({1, -1});
-        superball.update({0, speed});}});
+        superball.update({0, speed});
+    }});
 }
 
 int main(int argc, char *argv[]) {
@@ -37,7 +38,7 @@ int main(int argc, char *argv[]) {
         {{0, size}, {size, height - size * 2}},
         {{width - size, size}, {size, height - size * 2}}
     };
-    box player{{width / 4, height / 4}, {50, 50}, sf::Color::Blue};
+    box player{{30, 30}, {50, 50}, sf::Color::Blue};
     static constexpr float speed{1};
     struct {
         sf::Vector2f left{-speed, 0};
@@ -55,23 +56,23 @@ int main(int argc, char *argv[]) {
         {sf::Keyboard::Left,
             [&]{player.move(direction.left); invertMoveOnOverlap();}},
         {sf::Keyboard::Right,
-            [&]{player.move(direction.right); invertMoveOnOverlap();}},
+            [&]{player.move(direction.right); invertMoveOnOverlap();}}
     };
     ball superball1{{width / 2, height / 2}, 30, sf::Color::Red};
     // ball superball2{{width / 3, height / 3}, 30, sf::Color::Yellow};
     // ball superball3{{width / 2, height / 4}, 30, sf::Color::Cyan};
-    // ball superball4{{width / 7, height / 5}, 30, sf::Color::Magenta};
+    // ball superball4{{width / 7 + 20, height / 5 + 20}, 30, sf::Color::Magenta};
     addSuperballInteraction(actions, superball1, speed);
-    // addSuperballMovement(actions, superball2, speed);
-    // addSuperballMovement(actions, superball3, speed);
-    // addSuperballMovement(actions, superball4, speed);
+    // addSuperballInteraction(actions, superball2, speed);
+    // addSuperballInteraction(actions, superball3, speed);
+    // addSuperballInteraction(actions, superball4, speed);
 
     while (window.isOpen()) {
         action::execute(actions);
         window.clear();
         drawable::drawAll(window);
         window.display();
-        sf::sleep(sf::milliseconds(7));
+        sf::sleep(sf::milliseconds(8));
         sf::Event event;
 
         while (window.pollEvent(event)) {

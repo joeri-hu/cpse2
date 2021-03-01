@@ -1,5 +1,7 @@
 #include <cmath>
+#include <array>
 #include <algorithm>
+#include <string_view>
 #include <sfml/graphics.hpp>
 
 #include "overloads.hpp"

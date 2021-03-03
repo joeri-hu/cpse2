@@ -35,7 +35,7 @@ auto main() -> int {
     return 0;
 }
 
-auto load_file(std::string const& filename) -> std::vector<unsigned char> {
+auto load_file(std::string const& filename) -> clist {
     auto input = std::ifstream{filename, std::ios::binary | std::ios::ate};
 
     if (not input) {

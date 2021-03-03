@@ -48,7 +48,7 @@ auto load_file(std::string const& filename) -> clist {
     if (size == 0) {
         throw std::runtime_error("file appears to be empty: " + filename);
     }
-    std::vector<unsigned char> buffer(size);
+    clist buffer(size);
 
     if (not input.read(reinterpret_cast<char*>(buffer.data()), buffer.size())) {
         throw std::runtime_error("unable to read from file: " + filename);

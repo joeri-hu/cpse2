@@ -16,9 +16,9 @@ class interactable_handler : public placeable_handler {
 public:
     explicit interactable_handler(sf::RenderWindow& window) noexcept;
     auto interact() -> void;
-    virtual auto add(ste::observer_ptr<placeable> const& draw_obj) -> bool override;
-    virtual auto draw_all() const -> void override;
-    virtual auto print_all(std::ostream& output) const -> void override;
+    auto add(ste::observer_ptr<placeable> const& draw_obj) -> bool override;
+    auto draw_all() const -> void override;
+    auto print_all(std::ostream& output) const -> void override;
 private:
     std::vector<T> interactables;
     typename decltype(interactables)::iterator selection;

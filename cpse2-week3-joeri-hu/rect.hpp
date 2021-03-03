@@ -12,7 +12,7 @@ public:
         sf::Vector2f const& end,
         sf::Color const& color
     ) noexcept;
-    virtual auto to_string(std::ostream& output) const -> std::ostream& override;
+    auto to_string(std::ostream& output) const -> std::ostream& override;
 private:
     sf::RectangleShape shape;
 };

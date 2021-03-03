@@ -9,7 +9,7 @@ template<typename Fm, typename Fi>
 interactable<Fm, Fi>::interactable(
     ste::observer_ptr<placeable> const& draw_obj
 ) noexcept:
-    interactable{draw_obj, def_criteria, def_interaction}
+    interactable{draw_obj, std::move(def_criteria), std::move(def_interaction)}
 {}
 
 template<typename Fm, typename Fi>
@@ -19,8 +19,8 @@ interactable<Fm, Fi>::interactable(
     Fi interaction
 ) noexcept:
     draw_obj{draw_obj.get()},
-    criteria{criteria},
-    interaction{interaction}
+    criteria{std::move(criteria)},
+    interaction{std::move(interaction)}
 {}
 
 template<typename Fm, typename Fi>

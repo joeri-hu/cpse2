@@ -16,7 +16,7 @@
 # PATH_X64_CXX := d:\arduino\i686-7.3.0-release-posix-dwarf-rt_v5-rev0\mingw64\bin
 # PATH_X64_MAKE := c:\program files\avr-gcc-10.1.0-x64-windows\bin
 #
-OUT_FILE := factory.exe
+OUT_FILE := editor.exe
 
 SRC_DIR := .
 HDR_DIR := .
@@ -31,7 +31,7 @@ WIN_STL := -lgdi32 -lopengl32 -lws2_32 -lwinmm -lfreetype
 MACROS := SFML_STATIC
 
 # note: to hide the console window, add the following flag: -mwindows
-CXXFLAGS := -std=c++17 -pedantic -Wall -Wextra -Werror -D $(MACROS)
+CXXFLAGS := -std=c++17 -pedantic -Wall -Wextra -Werror -Ofast -D $(MACROS)
 CXX := g++
 
 # extract file names from all CPP files within the SRC_DIR directory

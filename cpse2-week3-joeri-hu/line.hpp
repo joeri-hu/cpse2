@@ -12,11 +12,11 @@ public:
         sf::Vector2f const& end,
         sf::Color const& color
     ) noexcept;
-    virtual auto to_string(std::ostream& output) const -> std::ostream& override;
+    auto to_string(std::ostream& output) const -> std::ostream& override;
 private:
     sf::VertexArray vertices;
-    virtual auto contains(sf::Vector2f const& target) const noexcept -> bool override;
-    virtual auto set_center_pos(sf::Vector2f const& position) noexcept -> void override;
+    auto contains(sf::Vector2f const& target) const noexcept -> bool override;
+    auto set_center_pos(sf::Vector2f const& position) noexcept -> void override;
     using vertex = struct {enum {start, end};};
 };
 

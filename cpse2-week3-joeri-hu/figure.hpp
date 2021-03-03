@@ -14,10 +14,10 @@ public:
 protected:
     explicit figure(sf::Shape& shape) noexcept;
     figure(sf::Shape& shape, sf::Vector2f const& center) noexcept;
-    virtual auto contains(sf::Vector2f const& target) const noexcept -> bool override;
+    auto contains(sf::Vector2f const& target) const noexcept -> bool override;
 private:
     sf::Shape& shape;
-    virtual auto set_center_pos(sf::Vector2f const& position) noexcept -> void override;
+    auto set_center_pos(sf::Vector2f const& position) noexcept -> void override;
 };
 
 #endif

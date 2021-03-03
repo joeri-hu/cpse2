@@ -21,7 +21,7 @@ protected:
     sf::Vector2f center;
 private:
     sf::Drawable const& drawable;
-    virtual auto draw(
+    auto draw(
         sf::RenderTarget& window,
         sf::RenderStates states
     ) const noexcept -> void override;

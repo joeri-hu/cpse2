@@ -4,6 +4,27 @@
 #include "utilities.hpp"
 #include "overloads.hpp"
 
+template<typename T>
+inline auto operator<<(
+    std::ostream& output,
+    sf::Vector2<T> const& input
+) -> std::ostream& {
+    return output << '(' << input.x << ',' << input.y << ')';
+}
+
+template<typename T>
+inline auto operator<<(
+    std::ostream& output,
+    sf::Color const& input
+) -> std::ostream& {
+    for (auto const& option : util::get_color_table()) {
+        if (option.color == input) {
+            return output << option.name;
+        }
+    }
+    return output;
+}
+
 namespace sf {
     template<typename T>
     inline auto operator*(
@@ -55,25 +76,4 @@ namespace sf {
     ) noexcept -> bool {
         return left > right or left == right;
     }
-}
-
-template<typename T>
-inline auto operator<<(
-    std::ostream& output,
-    sf::Vector2<T> const& input
-) -> std::ostream& {
-    return output << '(' << input.x << ',' << input.y << ')';
-}
-
-template<typename T>
-inline auto operator<<(
-    std::ostream& output,
-    sf::Color const& input
-) -> std::ostream& {
-    for (auto const& option : util::get_color_table()) {
-        if (option.color == input) {
-            return output << option.name;
-        }
-    }
-    return output;
 }

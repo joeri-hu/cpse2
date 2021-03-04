@@ -60,7 +60,7 @@ auto placeable_factory::process_resource(
     auto const [start, name] = parse(input, sf::Vector2f(), std::string());
     using func = std::function<ste::observer_ptr<placeable>()>;
     using data = struct {std::string_view name; func action;};
-    
+
     auto const options = std::array{
         data{"line", [&]{return make<line>(input, start, sf::Vector2f(), sf::Color());}},
         data{"circle", [&]{return make<circle>(input, start, sf::Color(), float());}},
@@ -78,7 +78,7 @@ auto placeable_factory::process_resource(
 
 template<typename... Ts>
 auto placeable_factory::parse(std::ifstream& input, Ts&&... args) -> std::tuple<Ts...> {
-    (input >> ... >> std::forward<decltype((args))>(args));
+    (input >> ... >> args);
     return {std::forward<Ts>(args)...};
 }
 
@@ -88,12 +88,12 @@ auto placeable_factory::make(
     sf::Vector2f const& start,
     Ts&&... args
 ) -> ste::observer_ptr<P> {
-    (input >> ... >> std::forward<decltype((args))>(args));
+    (input >> ... >> args);
     return ste::make_observer<P>(start, std::forward<Ts>(args)...);
 }
 
 template<typename T>
-std::ifstream& operator>>(std::ifstream& input, sf::Vector2<T>& output) {
+auto operator>>(std::ifstream& input, sf::Vector2<T>& output) -> std::ifstream& {
     char symbol;
     if (not (input >> symbol))   {throw end_of_file();}
     if (symbol not_eq '(')       {throw invalid_position(symbol);}
@@ -106,7 +106,7 @@ std::ifstream& operator>>(std::ifstream& input, sf::Vector2<T>& output) {
     return input;
 }
 
-std::ifstream& operator>>(std::ifstream& input, sf::Color& output) {
+auto operator>>(std::ifstream& input, sf::Color& output) -> std::ifstream& {
     std::string name;
     input >> name;
 

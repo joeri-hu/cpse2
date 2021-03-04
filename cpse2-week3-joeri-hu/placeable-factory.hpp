@@ -22,24 +22,24 @@ public:
 
     auto import_resources() noexcept -> void;
     auto export_resources() noexcept -> void;
-protected:
-    template<typename... Ts>
-    static auto parse(std::ifstream& input, Ts&&... args) -> std::tuple<Ts...>;
-    template<typename P, typename... Ts>
-    static auto make(
-        std::ifstream& input,
-        sf::Vector2f const& start,
-        Ts&&... args
-    ) -> ste::observer_ptr<P>;
 private:
     placeable_handler& handler;
     std::string resource_file;
     bool is_import_valid;
+
     auto process_resource(std::ifstream& input) -> ste::observer_ptr<placeable>;
+    template<typename... Ts>
+    auto parse(std::ifstream& input, Ts&&... args) -> std::tuple<Ts...>;
+    template<typename P, typename... Ts>
+    auto make(
+        std::ifstream& input,
+        sf::Vector2f const& start,
+        Ts&&... args
+    ) -> ste::observer_ptr<P>;
 };
 
 template<typename T>
-std::ifstream& operator>>(std::ifstream& input, sf::Vector2<T>& output);
-std::ifstream& operator>>(std::ifstream& input, sf::Color& output);
+auto operator>>(std::ifstream& input, sf::Vector2<T>& output) -> std::ifstream&;
+auto operator>>(std::ifstream& input, sf::Color& output) -> std::ifstream&;
 
 #endif

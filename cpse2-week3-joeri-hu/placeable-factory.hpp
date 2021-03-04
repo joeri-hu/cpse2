@@ -24,9 +24,9 @@ public:
     auto export_resources() noexcept -> void;
 protected:
     template<typename... Ts>
-    static auto read_values(std::ifstream& input) -> std::tuple<Ts...>;
+    static auto parse(std::ifstream& input, Ts&&... args) -> std::tuple<Ts...>;
     template<typename P, typename... Ts>
-    static auto parse(
+    static auto make(
         std::ifstream& input,
         sf::Vector2f const& start,
         Ts&&... args

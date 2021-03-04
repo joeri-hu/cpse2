@@ -20,8 +20,8 @@ public:
     auto interact(Ts&&... args) const noexcept;
     auto get_draw_object() const noexcept -> placeable const&;
 private:
-    static Fm const def_criteria;
-    static Fi const def_interaction;
+    static Fm const criteria_def;
+    static Fi const interaction_def;
     std::unique_ptr<placeable> draw_obj;
     Fm criteria;
     Fi interaction;

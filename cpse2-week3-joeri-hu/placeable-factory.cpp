@@ -57,15 +57,15 @@ auto placeable_factory::import_resources() noexcept -> void {
 auto placeable_factory::process_resource(
     std::ifstream& input
 ) -> ste::observer_ptr<placeable> {
-    auto const [start, name] = read_values<sf::Vector2f, std::string>(input);
+    auto const [start, name] = parse(input, sf::Vector2f(), std::string());
     using func = std::function<ste::observer_ptr<placeable>()>;
     using data = struct {std::string_view name; func action;};
     
     auto const options = std::array{
-        data{"line", [&]{return parse<line>(input, start, sf::Vector2f(), sf::Color());}},
-        data{"circle", [&]{return parse<circle>(input, start, sf::Color(), float());}},
-        data{"rect", [&]{return parse<rect>(input, start, sf::Vector2f(), sf::Color());}},
-        data{"picture", [&]{return parse<picture>(input, start, std::string());}},
+        data{"line", [&]{return make<line>(input, start, sf::Vector2f(), sf::Color());}},
+        data{"circle", [&]{return make<circle>(input, start, sf::Color(), float());}},
+        data{"rect", [&]{return make<rect>(input, start, sf::Vector2f(), sf::Color());}},
+        data{"picture", [&]{return make<picture>(input, start, std::string());}},
         data{"", []{throw end_of_file(); return nullptr;}}
     };
     for (auto const& option : options) {
@@ -77,19 +77,18 @@ auto placeable_factory::process_resource(
 }
 
 template<typename... Ts>
-auto placeable_factory::read_values(std::ifstream& input) -> std::tuple<Ts...> {
-    std::tuple<Ts...> values;
-    std::apply([&input](auto&&... args){(input >> ... >> args);}, values);
-    return values;
+auto placeable_factory::parse(std::ifstream& input, Ts&&... args) -> std::tuple<Ts...> {
+    (input >> ... >> std::forward<decltype((args))>(args));
+    return {std::forward<Ts>(args)...};
 }
 
 template<typename P, typename... Ts>
-auto placeable_factory::parse(
+auto placeable_factory::make(
     std::ifstream& input,
     sf::Vector2f const& start,
     Ts&&... args
 ) -> ste::observer_ptr<P> {
-    (input >> ... >> args);
+    (input >> ... >> std::forward<decltype((args))>(args));
     return ste::make_observer<P>(start, std::forward<Ts>(args)...);
 }
 

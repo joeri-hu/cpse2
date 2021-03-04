@@ -4,6 +4,8 @@
 
 template class interactable_handler<positionable>;
 template<>
-action::contains_func const positionable::def_criteria = action::contains;
+decltype(positionable::criteria_def)
+    positionable::criteria_def = action::contains;
 template<>
-action::center_func const positionable::def_interaction = action::center;
+decltype(positionable::interaction_def)
+    positionable::interaction_def = action::center;

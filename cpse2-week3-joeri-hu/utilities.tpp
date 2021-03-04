@@ -27,8 +27,7 @@ inline namespace screen {
             data{"white", sf::Color::White}
         };
     }
-}
- inline namespace dimension {
+} inline namespace dimension {
     template<typename T>
     inline auto center_origin(T& drawable) noexcept -> void {
         drawable.setOrigin(get_center(drawable));

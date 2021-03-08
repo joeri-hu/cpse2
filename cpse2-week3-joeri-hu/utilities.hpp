@@ -6,7 +6,7 @@
 namespace util {
 inline namespace screen {
     inline auto get_mouse_pos(sf::RenderWindow const& window) noexcept -> sf::Vector2f;
-} inline namespace object {
+} inline namespace color {
     inline auto get_color_table() noexcept;
 } inline namespace dimension {
     template<typename T>

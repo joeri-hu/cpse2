@@ -14,7 +14,7 @@ inline namespace screen {
     ) noexcept -> sf::Vector2f {
         return window.mapPixelToCoords(sf::Mouse::getPosition(window));
     }
-} inline namespace object {
+} inline namespace color {
     inline auto get_color_table() noexcept {
         using data = struct {std::string_view name; sf::Color color;};
         return std::array{

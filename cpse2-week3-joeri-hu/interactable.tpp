@@ -13,14 +13,15 @@ interactable<Fm, Fi>::interactable(
 {}
 
 template<typename Fm, typename Fi>
+template<typename M, typename I>
 interactable<Fm, Fi>::interactable(
     ste::observer_ptr<placeable> const& draw_obj,
-    Fm criteria,
-    Fi interaction
+    M&& criteria,
+    I&& interaction
 ) noexcept:
     draw_obj{draw_obj.get()},
-    criteria{std::move(criteria)},
-    interaction{std::move(interaction)}
+    criteria{std::forward<M>(criteria)},
+    interaction{std::forward<I>(interaction)}
 {}
 
 template<typename Fm, typename Fi>
@@ -37,11 +38,8 @@ auto interactable<Fm, Fi>::interact(Ts&&... args) const noexcept {
 
 template<typename Fm, typename Fi>
 template<typename F, typename... Ts>
-constexpr auto interactable<Fm, Fi>::invoke_action(
-    F action,
-    Ts&&... args
-) const noexcept {
-    if constexpr (std::is_member_function_pointer_v<F>) {
+auto interactable<Fm, Fi>::invoke_action(F&& action, Ts&&... args) const noexcept {
+    if constexpr (std::is_member_function_pointer_v<std::decay_t<F>>) {
         return (*draw_obj.*action)(std::forward<Ts>(args)...);
     } else {
         return action(std::forward<Ts>(args)...);

@@ -9,10 +9,11 @@ template<typename Fm, typename Fi>
 class interactable {
 public:
     explicit interactable(ste::observer_ptr<placeable> const& draw_obj) noexcept;
+    template<typename M, typename I>
     interactable(
         ste::observer_ptr<placeable> const& draw_obj,
-        Fm criteria,
-        Fi interaction
+        M&& criteria,
+        I&& interaction
     ) noexcept;
     template<typename... Ts>
     auto match(Ts&&... args) const noexcept;
@@ -26,7 +27,7 @@ private:
     Fm criteria;
     Fi interaction;
     template<typename F, typename... Ts>
-    constexpr auto invoke_action(F action, Ts&&... args) const noexcept;
+    auto invoke_action(F&& action, Ts&&... args) const noexcept;
 };
 
 #include "interactable.tpp"

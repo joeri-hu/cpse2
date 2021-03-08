@@ -76,7 +76,7 @@ auto interactable_handler<T>::find_selection() -> void {
     auto const mouse_pos = util::get_mouse_pos(window);
     selection = std::find_if(interactables.begin(), interactables.end(),
         [&mouse_pos = std::as_const(mouse_pos)]
-        (auto& interactable) -> bool {
+        (auto const& interactable) -> bool {
             return interactable.match(mouse_pos);
         }
     );

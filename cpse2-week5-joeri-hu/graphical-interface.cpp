@@ -154,7 +154,7 @@ auto graphical_interface::request_option(T const& options)
 auto graphical_interface::process_events() -> void {
     for (sf::Event event; window.pollEvent(event);) {
         if (event.type == sf::Event::Closed) {
-            window.close();
+            return window.close();
         }
     }
 }

@@ -57,10 +57,10 @@ cli: FLAGS := -D CLI
 cli: targets := $(filter-out graphical-interface.o, $(targets))
 cli: build
 
-gui: FLAGS     := -D SFML_STATIC -D GUI -mwindows
-gui: SFML_STL  := -lsfml-main -lsfml-graphics-s -lsfml-window-s -lsfml-system-s
-gui: WIN_STL   := -lgdi32 -lopengl32 -lws2_32 -lwinmm -lfreetype
-gui: targets   := $(filter-out cmd-line-interface.o, $(targets))
+gui: FLAGS    := -D SFML_STATIC -D GUI -mwindows
+gui: SFML_STL := -lsfml-main -lsfml-graphics-s -lsfml-window-s -lsfml-system-s
+gui: WIN_STL  := -lgdi32 -lopengl32 -lws2_32 -lwinmm -lfreetype
+gui: targets  := $(filter-out cmd-line-interface.o, $(targets))
 gui: build
 
 build: $(targets)

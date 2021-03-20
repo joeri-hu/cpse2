@@ -14,7 +14,7 @@
 #include "graphical-interface.hpp"
 
 inline namespace config {
-    namespace window {
+    namespace screen {
         constexpr auto title = "tic-tac-toe";
         constexpr auto fps = 60;
         constexpr auto width = 300;
@@ -29,18 +29,18 @@ inline namespace config {
 }
 
 graphical_interface::graphical_interface():
-    window{(load_textures(), window::mode), window::title},
+    window{(load_textures(), screen::mode), screen::title},
     message{(load_fonts(), ""), font, 20},
     markings{get_mark_table()},
     inputs{get_input_table()},
     squares{get_square_table()},
     board{textures.board}
 {
-    window.setFramerateLimit(window::fps);
+    window.setFramerateLimit(screen::fps);
     message.setStyle(sf::Text::Bold);
     message.setFillColor({34, 177, 76});
-    message.setPosition(window::ratio * sf::Vector2f{3, 73});
-    board.setPosition(window::ratio * sf::Vector2f{4, 0});
+    message.setPosition(screen::ratio * sf::Vector2f{3, 73});
+    board.setPosition(screen::ratio * sf::Vector2f{4, 0});
 }
 
 auto graphical_interface::load_textures() -> void {
@@ -75,34 +75,34 @@ auto graphical_interface::load_fonts() -> void {
 auto graphical_interface::get_mark_table() const -> mark_table {
     mark_table markings;
     markings.emplace(mark::type::cross, textures.cross).first->second
-        .setPosition(window::ratio * sf::Vector2f{24, 83});
+        .setPosition(screen::ratio * sf::Vector2f{24, 83});
     markings.emplace(mark::type::nought, textures.nought).first->second
-        .setPosition(window::ratio * sf::Vector2f{58, 83});
+        .setPosition(screen::ratio * sf::Vector2f{58, 83});
     return markings;
 }
 
 auto graphical_interface::get_input_table() const -> input_table {
     input_table inputs;
     inputs.emplace(input::type::square1, textures.none).first->second
-        .setPosition(window::ratio * sf::Vector2f{8, 7});
+        .setPosition(screen::ratio * sf::Vector2f{8, 7});
     inputs.emplace(input::type::square2, textures.none).first->second
-        .setPosition(window::ratio * sf::Vector2f{41, 7});
+        .setPosition(screen::ratio * sf::Vector2f{41, 7});
     inputs.emplace(input::type::square3, textures.none).first->second
-        .setPosition(window::ratio * sf::Vector2f{74, 7});
+        .setPosition(screen::ratio * sf::Vector2f{74, 7});
     inputs.emplace(input::type::square4, textures.none).first->second
-        .setPosition(window::ratio * sf::Vector2f{8, 31});
+        .setPosition(screen::ratio * sf::Vector2f{8, 31});
     inputs.emplace(input::type::square5, textures.none).first->second
-        .setPosition(window::ratio * sf::Vector2f{41, 31});
+        .setPosition(screen::ratio * sf::Vector2f{41, 31});
     inputs.emplace(input::type::square6, textures.none).first->second
-        .setPosition(window::ratio * sf::Vector2f{74, 31});
+        .setPosition(screen::ratio * sf::Vector2f{74, 31});
     inputs.emplace(input::type::square7, textures.none).first->second
-        .setPosition(window::ratio * sf::Vector2f{8, 54});
+        .setPosition(screen::ratio * sf::Vector2f{8, 54});
     inputs.emplace(input::type::square8, textures.none).first->second
-        .setPosition(window::ratio * sf::Vector2f{41, 54});
+        .setPosition(screen::ratio * sf::Vector2f{41, 54});
     inputs.emplace(input::type::square9, textures.none).first->second
-        .setPosition(window::ratio * sf::Vector2f{74, 54});
+        .setPosition(screen::ratio * sf::Vector2f{74, 54});
     inputs.emplace(input::type::quit, textures.quit).first->second
-        .setPosition(window::ratio * sf::Vector2f{71, 81});
+        .setPosition(screen::ratio * sf::Vector2f{71, 81});
     return inputs;
 }
 
@@ -136,7 +136,7 @@ auto graphical_interface::request_option(T const& options)
         if (window.hasFocus() and sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
             auto const mouse_pos = util::get_mouse_pos(window);
 
-            if (window::rect.contains(mouse_pos)) {
+            if (screen::rect.contains(mouse_pos)) {
                 auto const option = util::find_target(options, mouse_pos);
 
                 if (option not_eq options.cend()) {
@@ -161,7 +161,7 @@ auto graphical_interface::process_events() -> void {
 
 template<typename T>
 auto graphical_interface::draw(T const& options) -> void {
-    window.clear(window::color);
+    window.clear(screen::color);
     window.draw(board);
     window.draw(message);
     std::for_each(options.cbegin(), options.cend(),
@@ -173,12 +173,12 @@ auto graphical_interface::draw(T const& options) -> void {
 
 auto graphical_interface::enable_undo() -> void {
     inputs.try_emplace(input::type::undo, textures.undo).first->second
-        .setPosition(window::ratio * sf::Vector2f{3, 81});
+        .setPosition(screen::ratio * sf::Vector2f{3, 81});
 }
 
 auto graphical_interface::enable_redo() -> void {
     inputs.try_emplace(input::type::redo, textures.redo).first->second
-        .setPosition(window::ratio * sf::Vector2f{32, 81});
+        .setPosition(screen::ratio * sf::Vector2f{32, 81});
 }
 
 auto graphical_interface::disable_undo() -> void {

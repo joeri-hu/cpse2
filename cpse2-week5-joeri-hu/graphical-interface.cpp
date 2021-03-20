@@ -145,8 +145,8 @@ auto graphical_interface::request_option(T const& options)
                 }
             }
         }
-        process_events();
         draw(options);
+        process_events();
     }
     throw exit_program();
 }

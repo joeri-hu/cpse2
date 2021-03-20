@@ -20,7 +20,7 @@ private:
     sf::RenderWindow& window;
     sf::Color bg_color;
 
-    auto is_closing_initiated() const noexcept -> bool;
+    auto process_events() const noexcept -> void;
     auto interact() -> void;
     auto draw() const -> void;
 };

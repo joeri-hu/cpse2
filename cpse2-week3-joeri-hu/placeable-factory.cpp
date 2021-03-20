@@ -34,24 +34,26 @@ placeable_factory::~placeable_factory() {
     }
 }
 
-auto placeable_factory::export_resources() noexcept -> void {
-    std::ofstream output{resource_file};
-    handler.print_all(output);
-}
-
-auto placeable_factory::import_resources() noexcept -> void {
+auto placeable_factory::import_resources() noexcept -> bool {
     try {
         std::ifstream input{resource_file};
         for (;;) {
             handler.add(process_resource(input));
         }
     } catch (end_of_file const& exc) {
-        is_import_valid = true;
-        return;
+        return is_import_valid = true;
     } catch (std::exception const& exc) {
         std::cerr << exc.what() << std::endl;
-        is_import_valid = false;
     }
+    return is_import_valid = false;
+}
+
+auto placeable_factory::export_resources() noexcept -> bool {
+    if (std::ofstream output{resource_file}; output) {
+        handler.print_all(output);
+        return true;
+    }
+    return false;
 }
 
 auto placeable_factory::process_resource(

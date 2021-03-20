@@ -3,10 +3,7 @@
 #include "editor.hpp"
 
 auto main() -> int {
-    auto window = sf::RenderWindow{
-        {screen::height, screen::width},
-        screen::title
-    };
+    auto window = sf::RenderWindow{screen::mode, screen::title};
     window.setFramerateLimit(screen::fps);
-    return editor{window, file::objects, screen::color}.run();
+    return editor{window, resource::objects, screen::color}.run();
 }

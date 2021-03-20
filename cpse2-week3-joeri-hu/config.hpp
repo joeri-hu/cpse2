@@ -5,15 +5,16 @@
 
 inline namespace config {
     namespace screen {
-        constexpr auto title = "Factory";
-        constexpr auto height = 1024;
-        constexpr auto width = 576;
-        constexpr auto fps = 60;
+        inline constexpr auto title = "editor";
+        inline constexpr auto height = 576;
+        inline constexpr auto width = 1024;
+        inline constexpr auto fps = 60;
         inline auto const color = sf::Color{25, 25, 25};
-        inline auto const size = sf::Vector2f{height, width};
+        inline auto const mode = sf::VideoMode{width, height};
+        inline auto const size = sf::Vector2f{width, height};
     }
-    namespace file {
-        constexpr auto objects = "objects.txt";
+    namespace resource {
+        inline constexpr auto objects = "objects.txt";
     }
 }
 

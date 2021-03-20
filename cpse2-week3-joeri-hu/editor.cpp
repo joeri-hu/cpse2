@@ -1,4 +1,5 @@
 #include <utility>
+#include <cstdlib>
 #include <sfml/graphics.hpp>
 
 #include "interactable-handler.hpp"
@@ -17,29 +18,25 @@ editor::editor(
 {}
 
 auto editor::run() -> int {
-    factory.import_resources();
-
+    if (not factory.import_resources()) {
+        return EXIT_FAILURE;
+    }
     while (window.isOpen()) {
-        if (is_closing_initiated()) {
-            window.close();
-            return 0;
-        }
         interact();
         draw();
+        process_events();
     }
-    return 1;
+    return EXIT_SUCCESS;
 }
 
-auto editor::is_closing_initiated() const noexcept -> bool {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-        return true;
-    }
+auto editor::process_events() const noexcept -> void {
     for (sf::Event event; window.pollEvent(event);) {
-        if (event.type == sf::Event::Closed) {
-            return true;
+        if (event.type == sf::Event::Closed
+            or sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)
+        ) {
+            return window.close();
         }
     }
-    return false;
 }
 
 auto editor::interact() -> void {

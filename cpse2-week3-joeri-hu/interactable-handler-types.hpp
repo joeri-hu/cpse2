@@ -7,8 +7,8 @@
 
 namespace {
     namespace action {
-        constexpr auto contains = &placeable::contains;
-        constexpr auto center = &placeable::set_center_pos;
+        inline constexpr auto contains = &placeable::contains;
+        inline constexpr auto center = &placeable::set_center_pos;
 
         template<typename T, typename R>
         using type_of = std::decay_t<std::conditional_t<

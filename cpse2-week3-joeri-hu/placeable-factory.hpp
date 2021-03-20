@@ -11,7 +11,7 @@
 #include "placeable.hpp"
 #include "placeable-handler.hpp"
 
-class placeable_factory {
+class placeable_factory final {
 public:
     placeable_factory(placeable_handler& handler, std::string resource_file) noexcept;
     ~placeable_factory();
@@ -20,8 +20,8 @@ public:
     placeable_factory(placeable_factory&&) = delete;
     placeable_factory& operator=(placeable_factory&&) = delete;
 
-    auto import_resources() noexcept -> void;
-    auto export_resources() noexcept -> void;
+    auto import_resources() noexcept -> bool;
+    auto export_resources() noexcept -> bool;
 private:
     placeable_handler& handler;
     std::string resource_file;

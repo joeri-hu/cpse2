@@ -93,7 +93,7 @@ auto interactable_handler<T>::bring_selection_to_front() -> void {
 template<typename T>
 auto interactable_handler<T>::draw_all() const -> void {
     std::for_each(interactables.crbegin(), interactables.crend(),
-        [&](auto const& interactable) -> void {
+        [this](auto const& interactable) -> void {
             window.draw(interactable.get_draw_object());
         }
     );

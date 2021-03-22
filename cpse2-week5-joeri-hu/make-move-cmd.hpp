@@ -11,7 +11,7 @@ public:
     auto execute(game_logic& game) const -> void override;
     auto undo(game_logic& game) const -> void override;
 private:
-    move new_move;
+    move current_move;
 };
 
 #endif

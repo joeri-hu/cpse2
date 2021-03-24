@@ -65,10 +65,10 @@ auto graphical_interface::load_textures() -> void {
 }
 
 auto graphical_interface::load_fonts() -> void {
-    constexpr auto consola = "resources/consola.ttf";
+    constexpr auto resource = "resources/consola.ttf";
 
-    if (not font.loadFromFile(consola)) {
-        throw std::runtime_error("unable to load font '"s + consola + "' :(");
+    if (not font.loadFromFile(resource)) {
+        throw std::runtime_error("unable to load font '"s + resource + "' :(");
     }
 }
 
@@ -204,12 +204,11 @@ auto graphical_interface::show_acting_player(mark::type player) -> void {
     message.setString(get_mark_symbol(player) + " to move"s);
 }
 
-auto graphical_interface::show_winning_player(mark::type winner, int delay_s) -> void {
+auto graphical_interface::show_winning_player(mark::type winner) -> void {
     message.setString(winner == mark::type::none
         ? "it seems to be a draw :/"
         : "player "s + get_mark_symbol(winner) + " has won! :)");
     draw(inputs);
-    sf::sleep(sf::seconds(delay_s));
 }
 
 auto graphical_interface::get_mark_symbol(mark::type type) const -> char {

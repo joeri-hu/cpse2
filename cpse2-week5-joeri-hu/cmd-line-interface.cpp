@@ -1,5 +1,3 @@
-#include <thread>
-#include <chrono>
 #include <string>
 #include <iostream>
 
@@ -54,8 +52,7 @@ auto cmd_line_interface::get_square_table() const -> square_table {
 auto cmd_line_interface::request_mark() -> mark::type {
     std::cout << "\n  who wants to go first?\n\n"
         "  x - crosses\n"
-        "  o - noughts\n"
-        "  q - quit\n";
+        "  o - noughts\n";
     return request_option(markings);
 }
 
@@ -133,9 +130,8 @@ auto cmd_line_interface::show_acting_player(mark::type player) -> void {
     std::cout << "\n  " << markings.at(player) << " to move:\n\n";
 }
 
-auto cmd_line_interface::show_winning_player(mark::type winner, int delay_s) -> void {
+auto cmd_line_interface::show_winning_player(mark::type winner) -> void {
     winner == mark::type::none
         ? std::cout << "\n  it seems to be a draw :/\n\n"
         : std::cout << "\n  player " << markings.at(winner) << " has won! :)\n\n";
-    std::this_thread::sleep_for(std::chrono::seconds(delay_s));
 }

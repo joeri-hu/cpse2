@@ -13,8 +13,7 @@ inline namespace screen {
     inline auto get_mouse_pos(sf::RenderWindow const& window) -> sf::Vector2f {
         return window.mapPixelToCoords(sf::Mouse::getPosition(window));
     }
-}
-inline namespace collision {
+} inline namespace collision {
     template<typename T, typename V>
     inline auto find_target(T const& map, V const& target)
     -> typename T::const_iterator {

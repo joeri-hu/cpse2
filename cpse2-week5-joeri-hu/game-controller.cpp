@@ -6,6 +6,7 @@
 #include "mark.hpp"
 #include "move.hpp"
 #include "input.hpp"
+#include "utility.hpp"
 #include "exception.hpp"
 #include "interface.hpp"
 #include "game-logic.hpp"
@@ -96,7 +97,7 @@ auto game_controller::subsequent_cmd_exists() const -> bool {
 }
 
 auto game_controller::process_user_input() -> void {
-    switch (auto const input = user_interface.request_input(); input) {
+    switch (input::type const input{user_interface.request_input()}; input) {
     case input::type::undo: undo_command(); break;
     case input::type::redo: redo_command(); break;
     case input::type::quit: throw exit_program(); break;
@@ -138,7 +139,7 @@ auto game_controller::process_game_result() -> void {
     if (subsequent_cmd_exists()) {
         return;
     }
-    auto const winner = game.get_winning_player();
+    mark::type const winner{game.get_winning_player()};
 
     if (winner not_eq mark::type::none or game.is_board_full()) {
         user_interface.draw_board(game.get_moves());
@@ -153,5 +154,6 @@ auto game_controller::reset_game() -> void {
     game.reset_moves();
     user_interface.disable_undo();
     user_interface.disable_redo();
+    util::wait_for_sec(4);
     initialize_game();
 }

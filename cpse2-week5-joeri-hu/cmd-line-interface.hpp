@@ -19,7 +19,7 @@ public:
     auto draw_board(move_table const& moves) const -> void override;
     auto show_banner() const -> void override;
     auto show_acting_player(mark::type player) -> void override;
-    auto show_winning_player(mark::type winner, int delay_s) -> void override;
+    auto show_winning_player(mark::type winner) -> void override;
 private:
     using mark_table = std::map<mark::type, char>;
     using input_table = std::map<input::type, char>;

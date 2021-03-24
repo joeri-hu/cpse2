@@ -21,7 +21,7 @@ public:
     virtual auto draw_board(move_table const& moves) const -> void = 0;
     virtual auto show_banner() const -> void = 0;
     virtual auto show_acting_player(mark::type player) -> void = 0;
-    virtual auto show_winning_player(mark::type winner, int delay_s = 4) -> void = 0;
+    virtual auto show_winning_player(mark::type winner) -> void = 0;
 protected:
     interface() = default;
     ~interface() = default;

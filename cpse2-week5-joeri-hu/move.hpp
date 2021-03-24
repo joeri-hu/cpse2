@@ -25,7 +25,6 @@ private:
             return (*this)->second;
         }
     };
-    using map = std::map<mark::pos, mark::type>;
 public:
     move_table() = default;
     auto insert(move const& entry) -> move_iter {
@@ -34,19 +33,19 @@ public:
     auto find(key_type const& key) const -> move_iter {
         return move_iter{map::find(key)};
     }
+    using const_iterator = move_iter;
+    using value_type = move;
+    using map::key_type;
+    using map::size_type;
+    using map::size;
+    using map::count;
+    using map::at;
     using map::begin;
     using map::cbegin;
     using map::end;
     using map::cend;
-    using map::at;
-    using map::clear;
     using map::erase;
-    using map::count;
-    using map::size;
-    using map::size_type;
-    using map::key_type;
-    using value_type = move;
-    using const_iterator = move_iter;
+    using map::clear;
 };
 
 #endif

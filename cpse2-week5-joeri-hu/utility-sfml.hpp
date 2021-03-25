@@ -6,8 +6,6 @@
 #include <algorithm>
 #include <sfml/graphics.hpp>
 
-#include <iostream>
-
 namespace util {
 inline namespace screen {
     inline auto get_mouse_pos(sf::RenderWindow const& window) -> sf::Vector2f {
@@ -18,11 +16,10 @@ inline namespace screen {
     inline auto find_target(T const& map, V const& target)
     -> typename T::const_iterator {
         return std::find_if(map.cbegin(), map.cend(),
-            [&target = std::as_const(target)]
-            (auto const& entry) -> bool {
-                return entry.second.getGlobalBounds().contains(target);
-            }
-        );
+        [&target = std::as_const(target)]
+        (auto const& entry) -> bool {
+            return entry.second.getGlobalBounds().contains(target);
+        });
     }
 }
 }

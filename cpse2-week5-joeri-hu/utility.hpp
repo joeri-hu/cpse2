@@ -17,11 +17,10 @@ inline namespace time {
     inline auto find_key(T const& map, typename T::mapped_type const& value)
     -> typename T::const_iterator {
         return std::find_if(map.cbegin(), map.cend(),
-            [&value = std::as_const(value)]
-            (auto const& entry) -> bool {
-                return entry.second == value;
-            }
-        );
+        [&value = std::as_const(value)]
+        (auto const& entry) -> bool {
+            return entry.second == value;
+        });
     }
 }
 }
